@@ -15,7 +15,7 @@
         "ramsey/collection": "^1.2 || ^2.0"
     },
     "require-dev": {
-        "captainhook/captainhook": "^5.10",
+        "captainhook/captainhook": "^5.25",
         "captainhook/plugin-composer": "^5.3",
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
         "doctrine/annotations": "^1.8",
