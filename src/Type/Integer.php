@@ -42,6 +42,9 @@ final class Integer implements NumberInterface
      */
     private string $value;
 
+    /**
+     * @phpstan-ignore property.readOnlyByPhpDocDefaultValue
+     */
     private bool $isNegative = false;
 
     public function __construct(float | int | string | self $value)
@@ -145,6 +148,7 @@ final class Integer implements NumberInterface
         if ($sign === '-' && $value !== '0') {
             $value = $sign . $value;
 
+            /** @phpstan-ignore property.readOnlyByPhpDocAssignNotInConstructor */
             $this->isNegative = true;
         }
 

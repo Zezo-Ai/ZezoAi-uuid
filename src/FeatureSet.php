@@ -85,6 +85,8 @@ class FeatureSet
      *     system node ID (primarily for testing purposes)
      * @param bool $enablePecl True to enable the use of the PeclUuidTimeGenerator
      *     to generate version 1 UUIDs
+     *
+     * @phpstan-ignore constructor.unusedParameter ($forceNoBigNumber is deprecated)
      */
     public function __construct(
         bool $useGuids = false,

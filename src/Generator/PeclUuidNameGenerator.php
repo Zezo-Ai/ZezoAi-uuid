@@ -43,6 +43,6 @@ class PeclUuidNameGenerator implements NameGeneratorInterface
             ),
         };
 
-        return uuid_parse($uuid);
+        return (string) uuid_parse($uuid);
     }
 }

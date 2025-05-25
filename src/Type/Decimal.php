@@ -36,7 +36,7 @@ use function str_starts_with;
 final class Decimal implements NumberInterface
 {
     private string $value;
-    private bool $isNegative = false;
+    private bool $isNegative;
 
     public function __construct(float | int | string | self $value)
     {
@@ -61,6 +61,8 @@ final class Decimal implements NumberInterface
 
         if (str_starts_with($value, '-')) {
             $this->isNegative = true;
+        } else {
+            $this->isNegative = false;
         }
 
         $this->value = $value;

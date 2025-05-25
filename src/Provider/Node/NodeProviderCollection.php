@@ -56,6 +56,7 @@ class NodeProviderCollection extends AbstractCollection
         $this->data = array_filter(
             $data,
             function ($unserialized): bool {
+                /** @phpstan-ignore-next-line */
                 return $unserialized instanceof NodeProviderInterface;
             }
         );

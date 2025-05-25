@@ -70,6 +70,7 @@ class BuilderCollection extends AbstractCollection
         $this->data = array_filter(
             $data,
             function ($unserialized): bool {
+                /** @phpstan-ignore instanceof.alwaysTrue */
                 return $unserialized instanceof UuidBuilderInterface;
             }
         );

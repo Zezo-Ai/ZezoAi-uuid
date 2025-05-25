@@ -38,10 +38,8 @@ use function substr;
  * conversion. This object optimizes instantiation, serialization and string conversion time, at the cost of
  * increased overhead for more advanced UUID operations.
  *
- * @internal this type is used internally for performance reasons, and is not supposed to be directly referenced
+ * @internal this type is used internally for performance reasons and is not supposed to be directly referenced
  *           in consumer libraries.
- *
- * @immutable
  *
  * Note: the {@see FieldsInterface} does not declare methods that deprecated API
  *        relies upon: the API has been ported from the {@see \Ramsey\Uuid\Uuid} definition,

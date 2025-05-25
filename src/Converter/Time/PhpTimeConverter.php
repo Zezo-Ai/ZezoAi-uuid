@@ -92,6 +92,7 @@ class PhpTimeConverter implements TimeConverterInterface
 
         // Check to see whether we've overflowed the max/min integer size.
         // If so, we will default to a different time converter.
+        // @phpstan-ignore function.alreadyNarrowedType (the integer value might have overflowed)
         if (!is_int($uuidTime)) {
             return $this->fallbackConverter->calculateTime(
                 $seconds->toString(),

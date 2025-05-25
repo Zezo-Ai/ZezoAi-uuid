@@ -223,12 +223,16 @@ class Uuid implements UuidInterface
         self::DCE_DOMAIN_ORG => 'org',
     ];
 
+    /**
+     * @phpstan-ignore property.readOnlyByPhpDocDefaultValue
+     */
     private static ?UuidFactoryInterface $factory = null;
 
     /**
      * @var bool flag to detect if the UUID factory was replaced internally,
      *     which disables all optimizations for the default/happy path internal
      *     scenarios
+     * @phpstan-ignore property.readOnlyByPhpDocDefaultValue
      */
     private static bool $factoryReplaced = false;
 
@@ -321,9 +325,16 @@ class Uuid implements UuidInterface
             $uuid = self::getFactory()->fromString($data);
         }
 
+        /** @phpstan-ignore property.readOnlyByPhpDocAssignNotInConstructor */
         $this->codec = $uuid->codec;
+
+        /** @phpstan-ignore property.readOnlyByPhpDocAssignNotInConstructor */
         $this->numberConverter = $uuid->numberConverter;
+
+        /** @phpstan-ignore property.readOnlyByPhpDocAssignNotInConstructor */
         $this->fields = $uuid->fields;
+
+        /** @phpstan-ignore property.readOnlyByPhpDocAssignNotInConstructor */
         $this->timeConverter = $uuid->timeConverter;
     }
 
@@ -519,7 +530,10 @@ class Uuid implements UuidInterface
         $factory = self::getFactory();
 
         if (method_exists($factory, 'fromHexadecimal')) {
-            return $factory->fromHexadecimal($hex);
+            $uuid = $factory->fromHexadecimal($hex);
+            assert($uuid instanceof UuidInterface);
+
+            return $uuid;
         }
 
         throw new BadMethodCallException('The method fromHexadecimal() does not exist on the provided factory');
@@ -546,6 +560,8 @@ class Uuid implements UuidInterface
      * @param string $uuid A string to validate as a UUID
      *
      * @return bool True if the string is a valid UUID, false otherwise
+     *
+     * @phpstan-assert-if-true =non-empty-string $uuid
      */
     public static function isValid(string $uuid): bool
     {

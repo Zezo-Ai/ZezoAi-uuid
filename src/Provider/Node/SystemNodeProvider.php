@@ -72,10 +72,11 @@ class SystemNodeProvider implements NodeProviderInterface
      */
     protected function getNodeFromSystem(): string
     {
+        /** @var string | null $node */
         static $node = null;
 
         if ($node !== null) {
-            return (string) $node;
+            return $node;
         }
 
         // First, try a Linux-specific approach.
@@ -173,9 +174,10 @@ class SystemNodeProvider implements NodeProviderInterface
             $macs = array_map($trim, $macs);
 
             // Remove invalid entries.
-            $macs = array_filter($macs, function (string $address) {
-                return $address !== '00:00:00:00:00:00'
-                    && preg_match(self::SYSFS_PATTERN, $address);
+            $macs = array_filter($macs, function (mixed $address): bool {
+                assert(is_string($address));
+
+                return $address !== '00:00:00:00:00:00' && preg_match(self::SYSFS_PATTERN, $address);
             });
 
             /** @var string|bool $mac */
