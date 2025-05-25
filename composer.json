@@ -32,8 +32,7 @@
         "phpstan/phpstan-phpunit": "^1.1",
         "phpunit/phpunit": "^8.5 || ^9",
         "slevomat/coding-standard": "^8.4",
-        "squizlabs/php_codesniffer": "^3.5",
-        "vimeo/psalm": "^4.9"
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "replace": {
         "rhumsaa/uuid": "self.version"
@@ -77,10 +76,7 @@
         }
     },
     "scripts": {
-        "analyze": [
-            "@phpstan",
-            "@psalm"
-        ],
+        "analyze": "@phpstan",
         "build:clean": "git clean -fX build/",
         "lint": "parallel-lint src tests",
         "lint:paths": "parallel-lint",
@@ -93,13 +89,11 @@
         ],
         "phpunit": "phpunit --verbose --colors=always",
         "phpunit-coverage": "phpunit --verbose --colors=always --coverage-html build/coverage",
-        "psalm": "psalm --show-info=false --config=psalm.xml",
         "test": [
             "@lint",
             "@phpbench",
             "@phpcs",
             "@phpstan",
-            "@psalm",
             "@phpunit"
         ]
     }

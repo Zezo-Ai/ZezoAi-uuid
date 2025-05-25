@@ -41,7 +41,7 @@ use const STR_PAD_LEFT;
  *
  * @see Guid
  *
- * @psalm-immutable
+ * @immutable
  */
 final class Fields implements FieldsInterface
 {

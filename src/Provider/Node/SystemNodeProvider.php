@@ -104,10 +104,7 @@ class SystemNodeProvider implements NodeProviderInterface
             return '';
         }
 
-        /**
-         * @psalm-suppress UnnecessaryVarAnnotation
-         * @var string $phpOs
-         */
+        /** @var string $phpOs */
         $phpOs = constant('PHP_OS');
 
         ob_start();
@@ -151,10 +148,7 @@ class SystemNodeProvider implements NodeProviderInterface
     {
         $mac = '';
 
-        /**
-         * @psalm-suppress UnnecessaryVarAnnotation
-         * @var string $phpOs
-         */
+        /** @var string $phpOs */
         $phpOs = constant('PHP_OS');
 
         if (strtoupper($phpOs) === 'LINUX') {

@@ -40,9 +40,6 @@ class NodeProviderCollection extends AbstractCollection
      *
      * @param string $serialized The serialized PHP string to unserialize into
      *     a UuidInterface instance
-     *
-     * @phpcsSuppress SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint
-     * @psalm-suppress RedundantConditionGivenDocblockType
      */
     public function unserialize($serialized): void
     {

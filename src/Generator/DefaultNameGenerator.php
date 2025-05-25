@@ -26,7 +26,6 @@ use function hash;
  */
 class DefaultNameGenerator implements NameGeneratorInterface
 {
-    /** @psalm-pure */
     public function generate(UuidInterface $ns, string $name, string $hashAlgorithm): string
     {
         try {

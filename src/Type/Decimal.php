@@ -31,7 +31,7 @@ use function str_starts_with;
  * To support values as true decimals and not as floats or doubles, we store the
  * decimals as strings.
  *
- * @psalm-immutable
+ * @immutable
  */
 final class Decimal implements NumberInterface
 {
@@ -103,8 +103,6 @@ final class Decimal implements NumberInterface
      * Constructs the object from a serialized string representation
      *
      * @param string $data The serialized string representation of the object
-     *
-     * @psalm-suppress UnusedMethodCall
      */
     public function unserialize(string $data): void
     {
@@ -113,8 +111,6 @@ final class Decimal implements NumberInterface
 
     /**
      * @param array{string?: string} $data
-     *
-     * @psalm-suppress UnusedMethodCall
      */
     public function __unserialize(array $data): void
     {
