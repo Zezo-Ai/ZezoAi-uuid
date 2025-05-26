@@ -46,7 +46,7 @@ final class Hexadecimal implements TypeInterface
     }
 
     /**
-     * @psalm-return non-empty-string
+     * @return non-empty-string
      */
     public function toString(): string
     {
@@ -54,7 +54,7 @@ final class Hexadecimal implements TypeInterface
     }
 
     /**
-     * @psalm-return non-empty-string
+     * @return non-empty-string
      */
     public function __toString(): string
     {
@@ -62,7 +62,7 @@ final class Hexadecimal implements TypeInterface
     }
 
     /**
-     * @psalm-return non-empty-string
+     * @return non-empty-string
      */
     public function jsonSerialize(): string
     {
@@ -70,7 +70,7 @@ final class Hexadecimal implements TypeInterface
     }
 
     /**
-     * @psalm-return non-empty-string
+     * @return non-empty-string
      */
     public function serialize(): string
     {
@@ -110,7 +110,7 @@ final class Hexadecimal implements TypeInterface
     }
 
     /**
-     * @psalm-return non-empty-string
+     * @return non-empty-string
      */
     private function prepareValue(string $value): string
     {
