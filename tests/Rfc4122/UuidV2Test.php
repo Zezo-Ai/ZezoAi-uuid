@@ -22,7 +22,7 @@ use Ramsey\Uuid\Rfc4122\FieldsInterface;
 use Ramsey\Uuid\Rfc4122\UuidV2;
 use Ramsey\Uuid\Test\TestCase;
 use Ramsey\Uuid\Type\Hexadecimal;
-use Ramsey\Uuid\Type\Integer;
+use Ramsey\Uuid\Type\Integer as IntegerObject;
 use Ramsey\Uuid\Type\Time;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidFactory;
@@ -76,7 +76,7 @@ class UuidV2Test extends TestCase
      */
     public function testGetLocalDomainAndIdentifier(
         int $domain,
-        Integer $identifier,
+        IntegerObject $identifier,
         Time $time,
         int $expectedDomain,
         string $expectedDomainName,
@@ -105,7 +105,7 @@ class UuidV2Test extends TestCase
 
         $this->assertSame($expectedDomain, $uuid->getLocalDomain());
         $this->assertSame($expectedDomainName, $uuid->getLocalDomainName());
-        $this->assertInstanceOf(Integer::class, $uuid->getLocalIdentifier());
+        $this->assertInstanceOf(IntegerObject::class, $uuid->getLocalIdentifier());
         $this->assertSame($expectedIdentifier, $uuid->getLocalIdentifier()->toString());
         $this->assertSame($expectedTimestamp, $fields->getTimestamp()->toString());
         $this->assertInstanceOf(DateTimeInterface::class, $uuid->getDateTime());
@@ -114,10 +114,9 @@ class UuidV2Test extends TestCase
     }
 
     /**
-     * phpcs:ignore SlevomatCodingStandard.TypeHints.LongTypeHints.UsedLongTypeHint
      * @return array<array{
      *     domain: int,
-     *     identifier: Integer,
+     *     identifier: IntegerObject,
      *     time: Time,
      *     expectedDomain: int,
      *     expectedDomainName: non-empty-string,
@@ -134,7 +133,7 @@ class UuidV2Test extends TestCase
         return [
             [
                 'domain' => Uuid::DCE_DOMAIN_PERSON,
-                'identifier' => new Integer('12345678'),
+                'identifier' => new IntegerObject('12345678'),
                 'time' => new Time(0, 0),
                 'expectedDomain' => 0,
                 'expectedDomainName' => 'person',
@@ -144,7 +143,7 @@ class UuidV2Test extends TestCase
             ],
             [
                 'domain' => Uuid::DCE_DOMAIN_GROUP,
-                'identifier' => new Integer('87654321'),
+                'identifier' => new IntegerObject('87654321'),
                 'time' => new Time(0, 0),
                 'expectedDomain' => 1,
                 'expectedDomainName' => 'group',
@@ -154,7 +153,7 @@ class UuidV2Test extends TestCase
             ],
             [
                 'domain' => Uuid::DCE_DOMAIN_ORG,
-                'identifier' => new Integer('1'),
+                'identifier' => new IntegerObject('1'),
                 'time' => new Time(0, 0),
                 'expectedDomain' => 2,
                 'expectedDomainName' => 'org',
@@ -164,7 +163,7 @@ class UuidV2Test extends TestCase
             ],
             [
                 'domain' => Uuid::DCE_DOMAIN_PERSON,
-                'identifier' => new Integer('0'),
+                'identifier' => new IntegerObject('0'),
                 'time' => new Time(1583208664, 444109),
                 'expectedDomain' => 0,
                 'expectedDomainName' => 'person',
@@ -174,7 +173,7 @@ class UuidV2Test extends TestCase
             ],
             [
                 'domain' => Uuid::DCE_DOMAIN_PERSON,
-                'identifier' => new Integer('2147483647'),
+                'identifier' => new IntegerObject('2147483647'),
                 'time' => new Time(1583208879, 500000),
                 'expectedDomain' => 0,
                 'expectedDomainName' => 'person',
@@ -186,7 +185,7 @@ class UuidV2Test extends TestCase
             ],
             [
                 'domain' => Uuid::DCE_DOMAIN_PERSON,
-                'identifier' => new Integer('4294967295'),
+                'identifier' => new IntegerObject('4294967295'),
                 'time' => new Time(1583208879, 500000),
                 'expectedDomain' => 0,
                 'expectedDomainName' => 'person',
@@ -198,7 +197,7 @@ class UuidV2Test extends TestCase
             ],
             [
                 'domain' => Uuid::DCE_DOMAIN_PERSON,
-                'identifier' => new Integer('4294967295'),
+                'identifier' => new IntegerObject('4294967295'),
                 'time' => new Time(1583209093, 940838),
                 'expectedDomain' => 0,
                 'expectedDomainName' => 'person',
@@ -210,7 +209,7 @@ class UuidV2Test extends TestCase
             ],
             [
                 'domain' => Uuid::DCE_DOMAIN_PERSON,
-                'identifier' => new Integer('4294967295'),
+                'identifier' => new IntegerObject('4294967295'),
                 'time' => new Time(1583209093, 940839),
                 'expectedDomain' => 0,
                 'expectedDomainName' => 'person',
