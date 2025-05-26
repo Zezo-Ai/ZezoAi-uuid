@@ -79,12 +79,9 @@ jobs:
           - "8.2"
           - "8.3"
           - "8.4"
-        include:
-          # Keep the locked version by default
-          - dependency-versions: "locked"
-          # For PHP 8.0, installing with --prefer-highest to use brick/math v0.11
-          - php-version: "8.0"
-            dependency-versions: "highest"
+        dependency-versions:
+          - "locked"
+          - "highest"
 
     steps:
       - name: "Checkout repository"
@@ -135,8 +132,6 @@ jobs:
 
       - name: "Install dependencies (Composer)"
         uses: "ramsey/composer-install@v3"
-        with:
-          dependency-versions: "${{ matrix.dependencies }}"
 
       - name: "Run unit tests (PHPUnit)"
         run: "composer dev:test:coverage:ci"
@@ -168,12 +163,9 @@ jobs:
         operating-system:
           - "ubuntu-latest"
           - "windows-latest"
-        include:
-          # Keep the locked version by default
-          - dependency-versions: "locked"
-          # For PHP 8.0, installing with --prefer-highest to use brick/math v0.11
-          - php-version: "8.0"
-            dependency-versions: "highest"
+        dependency-versions:
+          - "locked"
+          - "highest"
 
     steps:
       - name: "Configure Git (for Windows)"
