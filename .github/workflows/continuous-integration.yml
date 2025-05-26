@@ -83,9 +83,6 @@ jobs:
           - "8.2"
           - "8.3"
           - "8.4"
-        dependency-versions:
-          - "locked"
-          - "highest"
 
     steps:
       - name: "Checkout repository"
@@ -107,7 +104,7 @@ jobs:
       - name: "Install dependencies (Composer)"
         uses: "ramsey/composer-install@v3"
         with:
-          dependency-versions: "${{ matrix.dependency-versions }}"
+          dependency-versions: "highest"
 
       - name: "Run benchmarks (PHPBench)"
         run: "composer dev:bench"
