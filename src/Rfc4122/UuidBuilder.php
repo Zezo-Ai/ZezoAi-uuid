@@ -42,13 +42,13 @@ class UuidBuilder implements UuidBuilderInterface
      * @param NumberConverterInterface $numberConverter The number converter to use when constructing the Uuid
      * @param TimeConverterInterface $timeConverter The time converter to use for converting Gregorian time extracted
      *     from version 1, 2, and 6 UUIDs to Unix timestamps
-     * @param TimeConverterInterface|null $unixTimeConverter The time converter to use for converter Unix Epoch time
+     * @param TimeConverterInterface | null $unixTimeConverter The time converter to use for converter Unix Epoch time
      *     extracted from version 7 UUIDs to Unix timestamps
      */
     public function __construct(
         private NumberConverterInterface $numberConverter,
         private TimeConverterInterface $timeConverter,
-        ?TimeConverterInterface $unixTimeConverter = null
+        ?TimeConverterInterface $unixTimeConverter = null,
     ) {
         $this->unixTimeConverter = $unixTimeConverter ?? new UnixTimeConverter(new BrickMathCalculator());
     }
