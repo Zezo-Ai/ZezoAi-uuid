@@ -58,8 +58,18 @@ trait VariantTrait
             throw new InvalidBytesException('Invalid number of bytes');
         }
 
-        if ($this->isMax() || $this->isNil()) {
-            return Uuid::RFC_4122;
+        // According to RFC 9562, sections {@link https://www.rfc-editor.org/rfc/rfc9562#section-4.1 4.1} and
+        // {@link https://www.rfc-editor.org/rfc/rfc9562#section-5.10 5.10}, the Max UUID falls within the range
+        // of the future variant.
+        if ($this->isMax()) {
+            return Uuid::RESERVED_FUTURE;
+        }
+
+        // According to RFC 9562, sections {@link https://www.rfc-editor.org/rfc/rfc9562#section-4.1 4.1} and
+        // {@link https://www.rfc-editor.org/rfc/rfc9562#section-5.9 5.9}, the Nil UUID falls within the range
+        // of the Apollo NCS variant.
+        if ($this->isNil()) {
+            return Uuid::RESERVED_NCS;
         }
 
         /** @var int[] $parts */
