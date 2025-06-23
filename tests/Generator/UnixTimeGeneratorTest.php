@@ -152,11 +152,8 @@ class UnixTimeGeneratorTest extends TestCase
      * @runInSeparateProcess since values are stored statically on the class
      * @preserveGlobalState disabled
      */
-    public function testGenerateProducesMonotonicResultsStartingWithAllBitsSetWithSameDate(): void
+    public function testGenerateRollsOverWithAllBitsSetWithSameDate(): void
     {
-        $this->markTestSkipped('Bytes generator is failing to properly increment under these conditions');
-
-        /* @phpstan-ignore-next-line */
         $dateTime = new DateTimeImmutable('now');
 
         /** @var RandomGeneratorInterface&MockInterface $randomGenerator */
@@ -170,15 +167,13 @@ class UnixTimeGeneratorTest extends TestCase
 
         $unixTimeGenerator = new UnixTimeGenerator($randomGenerator);
 
-        $previous = '';
-        for ($i = 0; $i < self::ITERATIONS; $i++) {
-            $bytes = $unixTimeGenerator->generate(null, null, $dateTime);
-            $this->assertTrue(
-                $bytes > $previous,
-                'Failed on iteration ' . $i . ' when evaluating ' . bin2hex($bytes) . ' > ' . bin2hex($previous),
-            );
-            $previous = $bytes;
-        }
+        // We can only call this twice before the overflow kicks in, "randomizing" all the bits back to 1's, according to
+        // our mocked random generator. As a result, we can't run this in a loop like with the other monotonicity tests
+        // in this class; it starts failing at the third loop. This is okay, since our goal is to test the overflow.
+        $first = $unixTimeGenerator->generate(null, null, $dateTime);
+        $second = $unixTimeGenerator->generate(null, null, $dateTime);
+
+        $this->assertTrue($second > $first);
     }
 
     /**
@@ -213,11 +208,8 @@ class UnixTimeGeneratorTest extends TestCase
      * @runInSeparateProcess since values are stored statically on the class
      * @preserveGlobalState disabled
      */
-    public function testGenerateProducesMonotonicResultsStartingWithAllBitsSetWithSameDateFor32BitPath(): void
+    public function testGenerateRollsOverWithAllBitsSetWithSameDateFor32BitPath(): void
     {
-        $this->markTestSkipped('Bytes generator is failing to properly increment under these conditions');
-
-        /* @phpstan-ignore-next-line */
         $dateTime = new DateTimeImmutable('now');
 
         /** @var RandomGeneratorInterface&MockInterface $randomGenerator */
@@ -231,14 +223,12 @@ class UnixTimeGeneratorTest extends TestCase
 
         $unixTimeGenerator = new UnixTimeGenerator($randomGenerator, 4);
 
-        $previous = '';
-        for ($i = 0; $i < self::ITERATIONS; $i++) {
-            $bytes = $unixTimeGenerator->generate(null, null, $dateTime);
-            $this->assertTrue(
-                $bytes > $previous,
-                'Failed on iteration ' . $i . ' when evaluating ' . bin2hex($bytes) . ' > ' . bin2hex($previous),
-            );
-            $previous = $bytes;
-        }
+        // We can only call this twice before the overflow kicks in, "randomizing" all the bits back to 1's, according to
+        // our mocked random generator. As a result, we can't run this in a loop like with the other monotonicity tests
+        // in this class; it starts failing at the third loop. This is okay, since our goal is to test the overflow.
+        $first = $unixTimeGenerator->generate(null, null, $dateTime);
+        $second = $unixTimeGenerator->generate(null, null, $dateTime);
+
+        $this->assertTrue($second > $first);
     }
 }
