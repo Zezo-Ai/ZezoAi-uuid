@@ -35,7 +35,11 @@ class UnixTimeGeneratorTest extends TestCase
 
         $bytes = $unixTimeGenerator->generate(null, null, $dateTime);
 
-        $this->assertSame($expectedBytes, $bytes);
+        $this->assertSame(
+            $expectedBytes,
+            $bytes,
+            'Failed asserting that "' . bin2hex($bytes) . '" is equal to "' . bin2hex($expectedBytes) . '"',
+        );
     }
 
     /**
