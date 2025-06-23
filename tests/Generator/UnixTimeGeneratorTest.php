@@ -178,7 +178,6 @@ class UnixTimeGeneratorTest extends TestCase
                 'Failed on iteration ' . $i . ' when evaluating ' . bin2hex($bytes) . ' > ' . bin2hex($previous),
             );
             $previous = $bytes;
-            echo "\n";
         }
     }
 
