@@ -6,6 +6,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 
+## 4.9.3 - 2026-06-18
+
+### Fixed
+
+* Upgrade brick/math to support versions `^0.14` to `^0.17`; fixed in [#638](https://github.com/ramsey/uuid/pull/638).
+* Add support for brick/match `^0.18`.
+
+
 ## 4.9.2 - 2025-12-14
 
 ### Fixed
